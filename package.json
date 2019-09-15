@@ -1,0 +1,23 @@
+{
+    "name": "property-api",
+    "version": "0.0.1",
+    "description": "Experience layer to search properties",
+    "main": "lambdas/index.js",
+    "scripts": {
+        "test": "jest --watch --coverage",
+        "coverage": "jest --coverage"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/drajk/property-api.git"
+    },
+    "author": "dheeraj khushalani",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/drajk/property-api/issues"
+    },
+    "homepage": "https://github.com/drajk/property-api#readme",
+    "dependencies": {
+        "jest": "^24.9.0"
+    }
+  }

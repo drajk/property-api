@@ -1,6 +1,6 @@
 const { ok } = require('../util/response');
 
-const getProperties = (request = {}) => {
+const getProperties = (params = {}) => {
     let properties = [
         {
             price: '1050000',
@@ -14,4 +14,17 @@ const getProperties = (request = {}) => {
     return ok(properties);
 };
 
-module.exports = getProperties;
+const getFavourites = (params = {}) => {
+    let favourites = [
+        {
+            price: '1050000',
+            address: '12 York Street, South Melbourne',
+        },
+    ];
+    return ok(favourites);
+};
+
+module.exports = {
+    getProperties,
+    getFavourites,
+};

@@ -1,4 +1,4 @@
-import { ok, error, badRequest } from '../response';
+const { ok, error, badRequest } = require('../response');
 
 describe('response', () => {
     let payload;

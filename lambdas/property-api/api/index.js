@@ -2,8 +2,8 @@ const { ok } = require('../util/response.util');
 const { transformProperty } = require('../util/transform.util');
 const dbUtil = require('../util/db.util');
 
-const getProperties = async (params = {}) => {
-    let properties = await dbUtil.filterBySuburb(params.suburb || '');
+const getProperties = async (params) => {
+    let properties = await dbUtil.findProperties(params);
     return ok(transformProperty(properties));
 };
 

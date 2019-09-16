@@ -14,10 +14,28 @@ const filterBySuburb = async (suburb) => {
     const scanParams = {
         ...dbClientSchema.table,
         ExpressionAttributeValues: {
-            ':s': suburb,
+            ':suburb': suburb,
+            ':isActive': true,
         },
-        FilterExpression: 'suburb = :s',
+        FilterExpression: 'suburb = :suburb and isActive = :isActive',
+    };
+    return await db.scan(scanParams).promise();
+};
+
+const findProperties = async (params) => {
+    const { suburb = '' } = params || {};
+
+    if (suburb) {
+        return await filterBySuburb(suburb);
     }
+
+    const scanParams = {
+        ...dbClientSchema.table,
+        ExpressionAttributeValues: {
+            ':isActive': true,
+        },
+        FilterExpression: 'isActive = :isActive',
+    };
     return await db.scan(scanParams).promise();
 };
 
@@ -25,14 +43,14 @@ const getFavourites = async () => {
     const scanParams = {
         ...dbClientSchema.table,
         ExpressionAttributeValues: {
-            ':isFavourite': true
+            ':isFavourite': true,
         },
         FilterExpression: 'isFavourite = :isFavourite',
-    }
+    };
     return await db.scan(scanParams).promise();
 };
 
 module.exports = {
-    filterBySuburb,
+    findProperties,
     getFavourites,
 };

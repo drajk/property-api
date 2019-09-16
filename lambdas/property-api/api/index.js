@@ -1,20 +1,15 @@
 const { ok } = require('../util/response.util');
+const { transformProperty } = require('../util/transform.util');
 const dbUtil = require('../util/db.util');
-
-const transform = ({ Items: items = [] }) => {
-    return items
-        ? items.map(({ id, price, address }) => ({ id, price, address }))
-        : [];
-};
 
 const getProperties = async (params = {}) => {
     let properties = await dbUtil.filterBySuburb(params.suburb || '');
-    return ok(transform(properties));
+    return ok(transformProperty(properties));
 };
 
 const getFavourites = async (params = {}) => {
     let favourites = await dbUtil.getFavourites();
-    return ok(transform(favourites));
+    return ok(transformProperty(favourites));
 };
 
 module.exports = {

@@ -1,27 +1,20 @@
-const { ok } = require('../util/response');
+const { ok } = require('../util/response.util');
+const dbUtil = require('../util/db.util');
 
-const getProperties = (params = {}) => {
-    let properties = [
-        {
-            price: '1050000',
-            address: '12 York Street, South Melbourne',
-        },
-        {
-            price: '750000',
-            address: '668 Inkerman Road, Caufield',
-        },
-    ];
-    return ok(properties);
+const transform = ({ Items: items = [] }) => {
+    return items
+        ? items.map(({ id, price, address }) => ({ id, price, address }))
+        : [];
 };
 
-const getFavourites = (params = {}) => {
-    let favourites = [
-        {
-            price: '1050000',
-            address: '12 York Street, South Melbourne',
-        },
-    ];
-    return ok(favourites);
+const getProperties = async (params = {}) => {
+    let properties = await dbUtil.filterBySuburb(params.suburb || '');
+    return ok(transform(properties));
+};
+
+const getFavourites = async (params = {}) => {
+    let favourites = await dbUtil.getFavourites();
+    return ok(transform(favourites));
 };
 
 module.exports = {

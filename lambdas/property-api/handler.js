@@ -1,4 +1,4 @@
-const { error, badRequest } = require('./util/response');
+const { error, badRequest } = require('./util/response.util');
 
 /**
  * 

@@ -14,10 +14,10 @@ const filterBySuburb = async (suburb) => {
     const scanParams = {
         ...dbClientSchema.table,
         ExpressionAttributeValues: {
-            ':suburb': suburb,
+            ':suburb': suburb.toLowerCase(),
             ':isActive': true,
         },
-        FilterExpression: 'suburb = :suburb and isActive = :isActive',
+        FilterExpression: 'contains (suburb, :suburb) and isActive = :isActive',
     };
     return await db.scan(scanParams).promise();
 };

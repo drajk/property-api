@@ -8,6 +8,12 @@ Experience layer / Backend for front end to search properties
 -   Create certificate and link api-gateway to custom domain `api.dheerajkhs.com`
 -   Create and deploy lambda
 
+
+## Next steps
+
+- Bundle lambda code using webpack/parcel or similar packages
+
+
 ## Available Scripts
 
 In the project directory, you can run:

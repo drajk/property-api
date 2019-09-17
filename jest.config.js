@@ -6,7 +6,10 @@ module.exports = {
     clearMocks: true,
 
     // An array of glob patterns indicating a set of files for which coverage information should be collected
-    collectCoverageFrom: ['lambdas/**/*.js'],
+    collectCoverageFrom: [
+        'lambdas/property-api/**/*.js',
+        '!**/node_modules/**',
+    ],
 
     // The directory where Jest should output its coverage files
     coverageDirectory: 'coverage',
@@ -23,6 +26,9 @@ module.exports = {
         'text-summary',
     ],
 
+    // Automatically restore mock state between every test
+    restoreMocks: true,
+
     // The test environment that will be used for testing
     testEnvironment: 'node',
 
@@ -31,4 +37,6 @@ module.exports = {
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
     testPathIgnorePatterns: ['/node_modules/'],
+
+    moduleDirectories: ['node_modules', 'lambdas'],
 };

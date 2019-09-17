@@ -1,4 +1,4 @@
-const { ok, error, badRequest } = require('../../property-api/util/response.util');
+const { ok, error, badRequest } = require('../response.util');
 
 describe('response', () => {
     let payload;

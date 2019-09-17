@@ -1,4 +1,4 @@
-const { transformProperty } = require('../../property-api/util/transform.util');
+const { transformProperty } = require('../transform.util');
 
 describe('transform', () => {
     it('should transform property and ignore unwanted properties', async () => {

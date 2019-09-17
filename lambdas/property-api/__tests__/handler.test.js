@@ -1,4 +1,4 @@
-const handler = require('../../property-api/handler');
+const handler = require('../handler');
 
 describe('handler', () => {
     let spy;

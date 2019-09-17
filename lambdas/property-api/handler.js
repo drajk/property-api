@@ -1,11 +1,24 @@
 const { error, badRequest } = require('./util/response.util');
 
 /**
- * 
- * @param {object} event injected by api gateway
- * @param {*} endpoints list if supported endpoints and thier handlers
+ * Gets matching route from router
+ * @param {*} method 
+ * @param {*} path 
+ * @param {*} router 
  */
-const handler = async (event, endpoints) => {
+const getMatchingRoute = (method, path, router) =>
+    router.find(
+        (route) =>
+            route.path.toLowerCase() === path.toLowerCase() &&
+            route.method.toLowerCase() === method.toLowerCase()
+    ) || {};
+
+/**
+ *
+ * @param {object} event injected by api gateway
+ * @param {*} router list of supported routes
+ */
+const handler = async (event, router) => {
     const { headers: { 'X-Amzn-Trace-Id': traceId } = {} } = event || {};
 
     // TODO: Create a new uuid() when traceId if its null
@@ -19,19 +32,18 @@ const handler = async (event, endpoints) => {
 
         console.log(`${logPrefix} - method: ${method} path: ${path}`);
 
-        const validEndpoints = endpoints.map(({ path }) => path.toLowerCase());
+        const matchingRoute = getMatchingRoute(method, path, router);
 
-        if (method !== 'GET' || !validEndpoints.includes(path)) {
+        if (!matchingRoute) {
             return badRequest('Invalid method or path');
         }
+        
+        return await matchingRoute.handler(params);
 
-        return await endpoints.find((item) => item.path === path).handler(params);
     } catch (err) {
         console.log(`${logPrefix} - error - ${err.message}`);
         return error(err.message);
     }
 };
 
-module.exports = {
-    handler,
-};
+module.exports = handler;

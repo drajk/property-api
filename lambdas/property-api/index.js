@@ -1,6 +1,6 @@
-const { endpoints } = require('./endpoints');
-const { handler } = require('./handler');
+const router = require('./router');
+const handler = require('./handler');
 
 module.exports = {
-    handler: (event) => handler(event, endpoints)
+    handler: (event) => handler(event, router)
 };

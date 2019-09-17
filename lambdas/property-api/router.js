@@ -1,16 +1,14 @@
 const { getProperties, getFavourites } = require('./api');
 
-const endpoints = [
+module.exports = [
     {
+        method: 'get',
         path: '/search',
         handler: getProperties,
     },
     {
+        method: 'get',
         path: '/favourites',
         handler: getFavourites,
     },
 ];
-
-module.exports = {
-    endpoints,
-};

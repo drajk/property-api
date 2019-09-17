@@ -1,9 +1,9 @@
-const { handler } = require('../../property-api/handler');
+const handler = require('../../property-api/handler');
 
 describe('handler', () => {
     let spy;
     let mockEvent;
-    let mockEndpoints;
+    let mockRouter;
 
     beforeAll(() => {
         spy = jest.fn();
@@ -17,8 +17,9 @@ describe('handler', () => {
             },
         };
 
-        mockEndpoints = [
+        mockRouter = [
             {
+                method: 'get',
                 path: '/search',
                 handler: spy,
             },
@@ -26,7 +27,7 @@ describe('handler', () => {
     });
 
     it('should call mapped handler', async () => {
-        await handler(mockEvent, mockEndpoints);
+        await handler(mockEvent, mockRouter);
         expect(spy).toHaveBeenCalled();
     });
 
